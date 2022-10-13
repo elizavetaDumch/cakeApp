@@ -1,5 +1,5 @@
 const Router = require ('express')
-const weight = require('../controllers/weight_Controller')
+const weight_Controller = require('../controllers/weight_Controller')
 const router = new Router()
 
 router.post('/', weight_Controller.create)

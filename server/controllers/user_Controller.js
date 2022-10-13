@@ -15,37 +15,41 @@ const generateJwt = (id, email, roles) => {
 
 class User_Controller {
     async registration(req, res, next) {
-        const { email, password, roles } = req.body
-        if (!email || !password) {
-            return next(Api_Error.bad_Request('Некорректный email или password'))
-        }
-        const candidate = await User.findOne({ where: { email } }) //проверка на уникальность
-        if (candidate) {
-            return next(Api_Error.bad_Request('Пользователь с таким email уже существует'))
-        }
-        const hashPassword = await bcrypt.hash(password, 5)
-        const user = await User.create({ email, roles, password: hashPassword })
-        const order = await Order.create({ userId: user.id })
-        const token = generateJwt(user.id, user.email, user.roles)
-
-        const transporter = nodemailer.createTransport({
-            service: 'gmail',
-            auth: {
-                user: process.env.EMAIL_LOGIN,
-                pass: process.env.EMAIL_PASSWORD,
+        try {
+            const { email, password, roles } = req.body
+            if (!email || !password) {
+                return next(Api_Error.bad_Request('Некорректный email или password'))
             }
-        })
+            const candidate = await User.findOne({ where: { email } }) //проверка на уникальность
+            if (candidate) {
+                return next(Api_Error.bad_Request('Пользователь с таким email уже существует'))
+            }
+            const hashPassword = await bcrypt.hash(password, 5)
+            const user = await User.create({ email, roles, password: hashPassword })
+            const order = await Order.create({ userId: user.id })
+            const token = generateJwt(user.id, user.email, user.roles)
 
-        const mailOptions = {
-            from: process.env.EMAIL_LOGIN,
-            to: process.env.EMAIL_LOGIN,
-            subject: "Регистрация в CakeApp",
-            text: "Email: " + email + "\nPassword: " + password
+            // const transporter = nodemailer.createTransport({
+            //     service: 'gmail',
+            //     auth: {
+            //         user: process.env.EMAIL_LOGIN,
+            //         pass: process.env.EMAIL_PASSWORD,
+            //     }
+            // })
+
+            // const mailOptions = {
+            //     from: process.env.EMAIL_LOGIN,
+            //     to: process.env.EMAIL_LOGIN,
+            //     subject: "Регистрация в CakeApp",
+            //     text: "Email: " + email + "\nPassword: " + password
+            // }
+
+            // transporter.sendMail(mailOptions, (error, info) => { if (error) console.log(error); else console.log('Email sent: ' + info.response); })
+
+            return res.json({ token })
+        } catch (e) {
+            next(Api_Error.bad_Request(e))
         }
-
-        transporter.sendMail(mailOptions, (error, info) => { if (error) console.log(error); else console.log('Email sent: ' + info.response); })
-
-        return res.json({ token })
     }
 
 

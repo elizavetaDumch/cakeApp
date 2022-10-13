@@ -6,11 +6,11 @@ import CakeItem from './CakeItem';
 
 const CakeList = observer(() => {
     const { cake } = useContext(Context)
+    
     return (
         <Row md={3} >
             {cake.cakes.map(cake =>
-            <CakeItem key={cake.id} cake={cake}/>
-                
+                <CakeItem key={cake.id} cake={cake} />
             )}
         </Row>
     );

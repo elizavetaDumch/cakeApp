@@ -6,6 +6,7 @@ const Cake = sequelize.define('cake', {
     name: { type: DataTypes.STRING, allowNull: false },
     description: { type: DataTypes.STRING },
     img: { type: DataTypes.STRING },
+    price: { type: DataTypes.INTEGER}
 })
 
 const Filling = sequelize.define('filling', {
@@ -30,6 +31,7 @@ const Type_cake = sequelize.define('type_cake', {
 const Weight = sequelize.define('weight', {
     id: { type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true },
     weight: { type: DataTypes.STRING, allowNull: false },
+    price: { type: DataTypes.INTEGER}
 })
 
 const Price = sequelize.define('price', {
