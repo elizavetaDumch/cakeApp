@@ -3,7 +3,7 @@ import { Context } from '../index';
 import { Navbar, Nav, Container, Button } from 'react-bootstrap'
 import { observer } from "mobx-react-lite"
 import { useHistory } from 'react-router-dom';
-import { ADMIN_ROUTE, CAKES_MAIN_SHOP_ROUTE, LOGIN_ROUTE } from '../utils/consts';
+import { ADMIN_ROUTE, MAIN_SHOP_ROUTE, LOGIN_ROUTE } from '../utils/consts';
 import logo from '../assets/logo.png'
 import Image from 'react-bootstrap/Image';
 import jwtDecode from 'jwt-decode';
@@ -15,6 +15,7 @@ const NavBar = observer(() => {
         user.setUser({})
         user.setIsAuth(false)
         localStorage.clear()
+        window.location.reload()
     }
 
     let decodeRoles
@@ -25,7 +26,7 @@ const NavBar = observer(() => {
     return (
         <Navbar >
             <Container>
-                <Navbar.Brand href= {CAKES_MAIN_SHOP_ROUTE} src={logo} >
+                <Navbar.Brand href= {MAIN_SHOP_ROUTE} src={logo} >
                     <Image width="100px" src={logo}/>
                     CakeApp
                 </Navbar.Brand>

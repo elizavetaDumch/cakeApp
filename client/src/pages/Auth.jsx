@@ -1,10 +1,10 @@
 import React, { useContext, useState } from 'react'
 import { Button, Container } from 'react-bootstrap'
 import { NavLink, useHistory, useLocation } from 'react-router-dom'
-import { Context } from '../..'
-import { login, registration } from '../../http/userAPI'
+import { Context } from '..'
+import { login, registration } from '../http/userAPI'
 import { observer } from "mobx-react-lite"
-import { CAKES_MAIN_SHOP_ROUTE, LOGIN_ROUTE, REGISTRATION_ROUTE } from '../../utils/consts'
+import { MAIN_SHOP_ROUTE, LOGIN_ROUTE, REGISTRATION_ROUTE } from '../utils/consts'
 
 
 const Auth = observer(() => {
@@ -25,7 +25,8 @@ const Auth = observer(() => {
             }
             user.setUser(user)
             user.setIsAuth(true)
-            history.push(CAKES_MAIN_SHOP_ROUTE)
+            history.push(MAIN_SHOP_ROUTE)
+            window.location.reload()
         } catch (e) {
             alert(e.response.data.message)
         }

@@ -52,11 +52,11 @@ const User = sequelize.define('user', {
 
 const Order = sequelize.define('order', {
     id: { type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true },
+    num_order: { type: DataTypes.INTEGER },
     status: { type: DataTypes.STRING, defaultValue: "Обработка заказа" },
     name: { type: DataTypes.STRING },
     last_name: { type: DataTypes.STRING },
-    phone: { type: DataTypes.INTEGER },
-    address: { type: DataTypes.INTEGER },
+    phone: { type: DataTypes.INTEGER },    
 })
 
 

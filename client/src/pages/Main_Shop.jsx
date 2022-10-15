@@ -1,15 +1,15 @@
 import { observer } from 'mobx-react-lite';
 import React, { useContext, useEffect } from 'react';
 import { Container } from 'react-bootstrap';
-import MyCarousel from '../../components/MyCarousel'
-import { Context } from '../..';
-import CakeList from '../../components/CakeList';
-import Pages from '../../components/Pages';
+import MyCarousel from '../components/MyCarousel'
+import { Context } from '..';
+import CakeList from '../components/CakeList';
+import Pages from '../components/Pages';
 
-import TypeBar from '../../components/TypeBar';
-import { fetchCakes, fetchTypes } from '../../http/cakeAPI';
+import TypeBar from '../components/TypeBar';
+import { fetchCakes, fetchTypes } from '../http/cakeAPI';
 
-const Cakes_Main_Shop = observer(() => {
+const Main_Shop = observer(() => {
     const { cake } = useContext(Context)
 
     useEffect(() => {
@@ -42,4 +42,4 @@ const Cakes_Main_Shop = observer(() => {
     );
 });
 
-export default Cakes_Main_Shop;
+export default Main_Shop;
