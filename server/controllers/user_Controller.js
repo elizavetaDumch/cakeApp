@@ -29,6 +29,8 @@ class User_Controller {
             const order = await Order.create({ userId: user.id })
             const token = generateJwt(user.id, user.email, user.roles)
 
+            //при регистрации пользователя данные отправляются на мою почту, но я закомментила, чтобы у тебя не возникало ошибок
+
             // const transporter = nodemailer.createTransport({
             //     service: 'gmail',
             //     auth: {

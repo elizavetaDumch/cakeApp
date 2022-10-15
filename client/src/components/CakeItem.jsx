@@ -36,11 +36,32 @@ const CakeItem = ({ cake }) => {
 
                     <Card.Text>Цена за декор: {cake.price} руб.</Card.Text>
 
-                    {weight.map((weight, i) =>
-                        (weight, i) ?
-                            <button key={i} onClick={() => clickWeightPrice(1)}>Вес: {weight.weight} Цена: {weight.price} руб.</button>
+                    {/* додумать потом. Активная кнопка - красная */}
+                    {weight.map((weights, i) =>
+                        (weights, i) ?
+                            <Card
+                                style={{ cursor: 'pointer' }}
+                                key={i}
+                                className="p-3 me-2"
+                                onClick={() => clickWeightPrice(1)}
+                                border={weight[0] ? 'danger' : 'light'}
+                            >
+                                Вес: {weights.weight} Цена: {weights.price} руб.
+                            </Card>                           
                             :
-                            <button key={i}  onClick={() => clickWeightPrice(0)}>Вес: {weight.weight} Цена: {weight.price} руб.</button>
+                            <Card
+                                style={{ cursor: 'pointer' }}
+                                key={i}
+                                className="p-3 me-2"
+                                onClick={() => clickWeightPrice(0)}
+                                border={weight[0] ? 'danger' : 'light'}
+                            >
+                                Вес: {weights.weight} Цена: {weights.price} руб.
+                            </Card>
+                            
+                            // <button key={i}  onClick={() => clickWeightPrice(1)}>Вес: {weight.weight} Цена: {weight.price} руб.</button>
+                            // <button key={i}  onClick={() => clickWeightPrice(0)}>Вес: {weight.weight} Цена: {weight.price} руб.</button>
+
                     )}
 
                     <Card.Text>Итоговая цена: {result} руб. </Card.Text>

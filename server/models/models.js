@@ -34,11 +34,6 @@ const Weight = sequelize.define('weight', {
     price: { type: DataTypes.INTEGER}
 })
 
-const Price = sequelize.define('price', {
-    id: { type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true },
-    price: { type: DataTypes.INTEGER },
-})
-
 const Cart_cake = sequelize.define('cart_cake', {
     id: { type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true },
     status: { type: DataTypes.STRING, defaultValue: "Проверяем наличие ингредиентов" },
@@ -52,7 +47,7 @@ const User = sequelize.define('user', {
     id: { type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true },
     email: { type: DataTypes.STRING, unique: true },
     password: { type: DataTypes.STRING },
-    roles: { type: DataTypes.STRING, defaultValue: "USER" },
+    roles: { type: DataTypes.STRING, defaultValue: "USER" }, //чтобы зарегать админа роль ADMIN
 })
 
 const Order = sequelize.define('order', {
@@ -82,15 +77,6 @@ Weight.belongsTo(Type_cake)
 Type_cake.hasMany(Cake)
 Cake.belongsTo(Type_cake)
 
-Weight.hasMany(Price)
-Price.belongsTo(Weight)
-
-Cake.hasMany(Price)
-Price.belongsTo(Cake)
-
-Price.hasMany(Cart_cake)
-Cart_cake.belongsTo(Price)
-
 User.hasMany(Order)
 Order.belongsTo(User)
 
@@ -103,5 +89,5 @@ Order.belongsTo(Cart)*/
 
 
 module.exports = {
-    Cake, Filling, Dough, Type_cake, Weight, Price, Cart_cake, User, Order
+    Cake, Filling, Dough, Type_cake, Weight, Cart_cake, User, Order
 }

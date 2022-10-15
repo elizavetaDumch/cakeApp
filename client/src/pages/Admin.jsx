@@ -18,10 +18,10 @@ const Admin = () => {
             <Button variant={"outline-dark"} className="mt-4 p-2">
                 Добавить корж
             </Button>
-            <Button variant={"outline-dark"} className="mt-4 p-2"> {/** реализовать позже */}
+            <Button variant={"outline-dark"} className="mt-4 p-2"> 
                 Просмотреть заказы
             </Button>
-            <CreateType show={true}/>
+            <CreateType show={false}/>
         </Container>
     );
 };
