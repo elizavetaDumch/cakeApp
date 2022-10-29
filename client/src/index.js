@@ -4,6 +4,7 @@ import './index.css';
 import UserStore from './store/UserStore';
 import App from './App';
 import CakeStore from './store/CakeStore';
+import CartStore from "./store/CartStore";
 
 export const Context = createContext(null)
 
@@ -11,8 +12,9 @@ export const Context = createContext(null)
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <Context.Provider value = {{
-    user: new UserStore(), 
-    cake: new CakeStore()
+      user: new UserStore(),
+      cake: new CakeStore(),
+      cart: new CartStore()
   }}>
     <App />
   </Context.Provider>  
@@ -20,7 +22,7 @@ root.render(
 
 /*ReactDOM.render(
   <Context.Provider value = {{
-    user: new UserStore() 
+    user: new UserStore()
   }}>
     <App />
   </Context.Provider>,

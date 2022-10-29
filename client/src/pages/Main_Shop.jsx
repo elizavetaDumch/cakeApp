@@ -18,7 +18,6 @@ const Main_Shop = observer(() => {
             cake.setCakes(data.rows)
             cake.setTotalCount(data.count)
         })
-
     }, [cake])
 
     useEffect(() => {
@@ -30,15 +29,13 @@ const Main_Shop = observer(() => {
 
     return (
         <div>
-             <MyCarousel />
+            <MyCarousel />
             <Container>
-               
                 <TypeBar />
                 <CakeList />
                 <Pages />
             </Container>
         </div>
-
     );
 });
 
