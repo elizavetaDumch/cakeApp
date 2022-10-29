@@ -3,13 +3,15 @@ import { Context } from '../index';
 import { Navbar, Nav, Container, Button } from 'react-bootstrap'
 import { observer } from "mobx-react-lite"
 import { useHistory } from 'react-router-dom';
-import { ADMIN_ROUTE, MAIN_SHOP_ROUTE, LOGIN_ROUTE } from '../utils/consts';
+import {ADMIN_ROUTE, MAIN_SHOP_ROUTE, LOGIN_ROUTE, CART_CAKE_ROUTE} from '../utils/consts';
 import logo from '../assets/logo.png'
 import Image from 'react-bootstrap/Image';
 import jwtDecode from 'jwt-decode';
 
 const NavBar = observer(() => {
-    const { user } = useContext(Context)
+
+    const { user, cart } = useContext(Context)
+
     const history = useHistory()
     const logOut = () => {
         user.setUser({})
@@ -20,13 +22,15 @@ const NavBar = observer(() => {
 
     let decodeRoles
     if (localStorage.token) {
-        decodeRoles = jwtDecode(localStorage.token)       
+        decodeRoles = jwtDecode(localStorage.token)
     }
 
     return (
         <Navbar >
             <Container>
-                <Navbar.Brand href= {MAIN_SHOP_ROUTE} src={logo} >
+                <Navbar.Brand
+                    src={logo}
+                    onClick={() => history.push(MAIN_SHOP_ROUTE)}>
                     <Image width="100px" src={logo}/>
                     CakeApp
                 </Navbar.Brand>
@@ -35,30 +39,32 @@ const NavBar = observer(() => {
 
                         {decodeRoles.roles === "ADMIN" &&
                             <Button variant={"outline-dark"}
-                                onClick={() => history.push(ADMIN_ROUTE)}
-                            >
+                                onClick={() => history.push(ADMIN_ROUTE)}>
                                 Админ панель
                             </Button>
                         }
 
                         <Button variant={"outline-dark"}
                             className="ms-2"
-                            onClick={() => logOut()}
-                        >
+                            onClick={() => logOut()}>
                             Выйти
                         </Button>
                     </Nav>
                     :
                     <Nav className="ml-auto">
                         <Button variant={"outline-dark"}
-                            onClick={() => history.push(LOGIN_ROUTE)}
-                        >
+                            onClick={() => history.push(LOGIN_ROUTE)}>
                             Авторизация
                         </Button>
                     </Nav>
                 }
+                <Nav className="ml-auto">
+                    <Button variant={"outline-dark"}
+                            onClick={() => history.push(CART_CAKE_ROUTE)}>
+                        Корзина ({ cart.quantity })
+                    </Button>
+                </Nav>
             </Container>
-
 
         </Navbar>
     );
