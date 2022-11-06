@@ -25,7 +25,7 @@ const Dough = sequelize.define('dough', {
 
 const Type_cake = sequelize.define('type_cake', {
     id: { type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true },
-    name: { type: DataTypes.STRING, allowNull: false }, 
+    name: { type: DataTypes.STRING, allowNull: false },
 })
 
 const Weight = sequelize.define('weight', {
@@ -34,14 +34,18 @@ const Weight = sequelize.define('weight', {
     price: { type: DataTypes.INTEGER}
 })
 
-const Cart_cake = sequelize.define('cart_cake', {
-    id: { type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true },
-    status: { type: DataTypes.STRING, defaultValue: "Проверяем наличие ингредиентов" },
-})
+const Cart = sequelize.define("cart", {
+    id: {
+        type: DataTypes.INTEGER,
+        primaryKey: true,
+        autoIncrement: true,
+    },
+});
 
-/*const Cart = sequelize.define('cart', {
-    id: {type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true},
-})*/
+const CartProduct = sequelize.define("cart_product", {
+    id: { type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true },
+    quantity: { type: DataTypes.INTEGER, defaultValue: 1 },
+});
 
 const User = sequelize.define('user', {
     id: { type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true },
@@ -56,38 +60,44 @@ const Order = sequelize.define('order', {
     status: { type: DataTypes.STRING, defaultValue: "Обработка заказа" },
     name: { type: DataTypes.STRING },
     last_name: { type: DataTypes.STRING },
-    phone: { type: DataTypes.INTEGER },    
+    phone: { type: DataTypes.INTEGER },
 })
 
 
+User.hasMany(Order)
+User.hasOne(Cart)
 
-
-Cake.hasMany(Cart_cake)
-Cart_cake.belongsTo(Cake)
-
-Filling.hasMany(Cart_cake)
-Cart_cake.belongsTo(Filling)
-
-Dough.hasMany(Cart_cake)
-Cart_cake.belongsTo(Dough)
-
-Type_cake.hasMany(Weight)
-Weight.belongsTo(Type_cake)
-
-Type_cake.hasMany(Cake)
+Cake.hasMany(CartProduct)
 Cake.belongsTo(Type_cake)
 
-User.hasMany(Order)
+Filling.hasMany(CartProduct)
+
+Dough.hasMany(CartProduct)
+
+Weight.belongsTo(Type_cake)
+
+Type_cake.hasMany(Weight)
+Type_cake.hasMany(Cake)
+
 Order.belongsTo(User)
 
-/*Cart.hasMany(Cart_cake)
-Cart_cake.belongsTo(Cart)
+CartProduct.belongsTo(Cart)
+CartProduct.belongsTo(Filling)
+CartProduct.belongsTo(Cake)
+CartProduct.belongsTo(Dough)
 
-Cart.hasOne(Order)
-Order.belongsTo(Cart)*/
-
+Cart.hasMany(CartProduct)
+Cart.belongsTo(User)
 
 
 module.exports = {
-    Cake, Filling, Dough, Type_cake, Weight, Cart_cake, User, Order
+    Cake,
+    Filling,
+    Dough,
+    Type_cake,
+    Weight,
+    Cart,
+    CartProduct,
+    User,
+    Order
 }

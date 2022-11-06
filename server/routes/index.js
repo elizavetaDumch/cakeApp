@@ -1,6 +1,7 @@
 const Router = require ('express')
 const router = new Router()
 const cake_Router = require ('./cake_Router')
+const cart_Router = require ('./cart_Router')
 const cart_cake_Router = require ('./cart_cake_Router')
 const weight_Router = require ('./weight_Router')
 const dough_Router = require ('./dough_Router')
@@ -12,6 +13,7 @@ const user_Router = require ('./user_Router')
 
 
 router.use('/cake', cake_Router)
+router.use('/cart', cart_Router)
 router.use('/cart_cake', cart_cake_Router)
 router.use('/dough', dough_Router)
 router.use('/filling', filling_Router)
