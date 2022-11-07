@@ -5,15 +5,7 @@ import Image from "react-bootstrap/Image";
 import { toast } from "react-toastify";
 import { Context } from "../index";
 
-const CartItem = ({ product }) => {
-    const { cart } = useContext(Context);
-
-    const removeFromCart = async (cartProductId) => {
-        const data = await deleteProductFromCart(cartProductId);
-        cart.products = data.cart_products;
-        toast("Товар удален из корзины");
-    };
-
+const OrderProductItem = ({ product }) => {
     return (
         <Col className="mt-5">
             <Card border={"dark"} style={{ width: 250 }}>
@@ -40,16 +32,10 @@ const CartItem = ({ product }) => {
                         Сумма:
                         {product.quantity * (product.cake.price + product.weight.price)} руб.
                     </Card.Text>
-                    <Button
-                        variant="danger"
-                        onClick={() => removeFromCart(product.id)}
-                    >
-                        Удалить
-                    </Button>
                 </Card.Body>
             </Card>
         </Col>
     );
 };
 
-export default CartItem;
+export default OrderProductItem;
