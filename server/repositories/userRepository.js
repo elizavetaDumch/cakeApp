@@ -1,8 +1,16 @@
-const { User, Cart, CartProduct } = require("../models/models");
+const {
+    User,
+    Cart,
+    CartProduct,
+    Cake,
+    Weight,
+    Filling,
+    Dough,
+} = require("../models/models");
 
 class UserRepository {
     async getUserById(userId) {
-        return await User.findByPk(userId, {
+        const user = await User.findByPk(userId, {
             include: [
                 {
                     model: Cart,
@@ -11,11 +19,26 @@ class UserRepository {
                         {
                             model: CartProduct,
                             required: false,
+                            include: [
+                                {
+                                    model: Cake,
+                                },
+                                {
+                                    model: Weight,
+                                },
+                                {
+                                    model: Filling,
+                                },
+                                {
+                                    model: Dough,
+                                },
+                            ],
                         },
                     ],
                 },
             ],
         });
+        return user;
     }
 }
 

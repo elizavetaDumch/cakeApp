@@ -1,9 +1,11 @@
-const Router = require ('express')
-const order_Controller = require('../controllers/order_Controller')
-const router = new Router()
+const Router = require("express");
+const order_Controller = require("../controllers/order_Controller");
+const authMiddleware = require("../middleware/authMiddleware");
+const toAsyncRouter = require("async-express-decorator");
+const router = toAsyncRouter(Router());
 
-router.post('/', order_Controller.create)
-router.get('/', order_Controller.getAll)
-router.get('/:id', order_Controller.getOne)
+router.post("/", authMiddleware, order_Controller.create);
+router.get("/", authMiddleware, order_Controller.getAll);
+router.get("/:id", authMiddleware, order_Controller.getOne);
 
-module.exports = router
+module.exports = router;

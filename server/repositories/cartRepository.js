@@ -2,22 +2,36 @@ const { Cart, CartProduct } = require("../models/models");
 
 class CartRepository {
     /**
-     * initialize the user's cart on first access
+     * Initialize the user's cart on first access
      * @param userId
-     * @returns {Promise<*>} Cart
+     * @returns {Promise<Cart>}
      */
     async initializeUserCart(userId) {
-        return await Cart.create({
+        const cart = await Cart.create({
             userId: userId,
+        });
+        return cart;
+    }
+
+    async truncateCart(cartId) {
+        await CartProduct.destroy({
+            where: { cartId },
         });
     }
 
-    async update(cart) {
-        await Cart.upsert(cart);
+    async findCartProductByIdAndCartId({ id, cartId }) {
+        const cartProduct = await CartProduct.findOne({
+            where: { id, cartId },
+        });
+        return cartProduct;
     }
 
     async upsertCartProduct(cartProduct) {
-        await CartProduct.upsert(cartProduct)
+        await CartProduct.upsert(cartProduct);
+    }
+
+    async deleteCartProductById(id) {
+        await CartProduct.destroy({ where: { id } });
     }
 }
 

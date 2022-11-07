@@ -1,9 +1,13 @@
-import {makeAutoObservable} from "mobx"
+import { makeAutoObservable } from "mobx";
+import { fetchCart } from "../http/cartAPI";
 
 export default class CartStore {
-    constructor () {
-        this._products = []
-        makeAutoObservable(this)
+    constructor() {
+        this._products = [];
+        fetchCart().then((cart) => {
+            this._products = cart.cart_products;
+        });
+        makeAutoObservable(this);
     }
 
     get products() {
@@ -16,16 +20,7 @@ export default class CartStore {
 
     get quantity() {
         return this._products
-            .map(product => product.quantity)
-            .reduce((previous, current) => previous + current, 0)
-    }
-
-    addProduct(product) {
-        const productInCart = this._products.find(productInCart => productInCart.id === product.id)
-        if (productInCart) {
-            productInCart.quantity++
-        } else {
-            this._products.push({...product, quantity: 1})
-        }
+            .map((product) => product.quantity)
+            .reduce((previous, current) => previous + current, 0);
     }
 }
