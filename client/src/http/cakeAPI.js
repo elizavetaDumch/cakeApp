@@ -5,7 +5,12 @@ export const createType = async (type) => {
     return data
 }
 
-export const fetchTypes = async () => {
+export const createWeight = async (weight) => {
+    const { data } = await $authHost.post('api/weight', weight)
+    return data
+}
+
+export const fetchTypes = async () => { //fetch получение
     const { data } = await $host.get('api/type_cake')
     return data
 }

@@ -2,7 +2,11 @@ const { Weight } = require("../models/models")
 
 class Weight_Controller {
     async create(req, res) {
-
+        let {weight_one, weight_two, price_weight_one, price_weight_two} = req.body
+        const weight_1 = await Weight.create({weight_one, price_weight_one})
+        const weight_2 = await Weight.create({ weight_two, price_weight_two})       
+        return res.json(weight_1, weight_2)
+        
     }
 
     async getAll(req, res) {

@@ -1,10 +1,35 @@
-const {Type_cake} = require('../models/models')
+const {Type_cake, Weight} = require('../models/models')
+
 const Api_Error = require ('../error/Api_Error')
 
 class Type_Controller {
     async create (req,res) {
-        //const {name} = req.body
+       
+        const {name} = req.body
+        const type = await Type.create({name})
+        
+        if (weight1, weight2) {
+            weight1 = JSON.parse(weight1)
+            weight2 = JSON.parse(weight2)
 
+            //для первой категории веса
+            weight1.forEach(i =>
+                Weight.create({
+                    weight: i.weight,
+                    price: i.price,
+                    typeCakeId: type.id
+                })
+            )
+           //для второй категории веса
+            weight2.forEach(i =>
+                Weight.create({
+                    weight: i.weight,
+                    price: i.price,
+                    typeCakeId: type.id
+                })
+            )
+        }
+        return res.json(type)
     }
 
     async getOne (req, res){

@@ -19,6 +19,9 @@ export default class CartStore {
     }
 
     get quantity() {
+        if (this._products === undefined) {
+            window.location.reload()
+        }
         return this._products
             .map((product) => product.quantity)
             .reduce((previous, current) => previous + current, 0);

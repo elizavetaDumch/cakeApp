@@ -18,6 +18,15 @@ class OrderRepository {
         });
         return createdOrder;
     }
+    
+//заказы всех пользователей
+    async getOrders(userId) {
+        const orders = await Order.findAll({           
+            order: [["id", "DESC"]],
+            include: OrderRepository.#getOrderIncludeGraph(),
+        });
+        return orders;
+    }
 
     async getUserOrders(userId) {
         const orders = await Order.findAll({
@@ -30,11 +39,22 @@ class OrderRepository {
         return orders;
     }
 
-    async getUserOrder({ id, userId }) {
+    /* async getUserOrder({ id, userId }) {
         const order = await Order.findOne({
             where: {
                 id,
                 userId,
+            },
+            include: OrderRepository.#getOrderIncludeGraph(),
+        });
+        return order;
+    } */
+
+    async getUserOrder({ id}) {
+        const order = await Order.findOne({
+            where: {
+                id,
+                
             },
             include: OrderRepository.#getOrderIncludeGraph(),
         });

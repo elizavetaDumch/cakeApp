@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Container } from "react-bootstrap";
 import OrderItem from "../components/OrderItem";
-import { fetchOrders } from "../http/orderAPI";
+import { fetchOrders } from "../http/orderAPI"; 
 import Spinner from "../components/Spinner";
 
 const Orders = () => {

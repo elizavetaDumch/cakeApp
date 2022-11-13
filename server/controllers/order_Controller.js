@@ -1,3 +1,4 @@
+const { Order } = require("../models/models");
 const orderService = require("../services/orderService");
 
 class Order_Controller {
@@ -12,6 +13,12 @@ class Order_Controller {
 
     async getAll(req, res) {
         const orders = await orderService.getUserOrders(req.user.id);
+        return res.json(orders);
+    }
+
+     //заказы всех пользователей
+    async findAll(req, res) {
+        const orders = await Order.findAll()
         return res.json(orders);
     }
 

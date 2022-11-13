@@ -36,8 +36,13 @@ class OrderService {
         return orders;
     }
 
-    async getOrder({ id, userId }) {
+    /* async getOrder({ id, userId }) {
         const order = await orderRepository.getUserOrder({ id, userId });
+        return order;
+    } */
+
+    async getOrder({ id }) {
+        const order = await orderRepository.getUserOrder({ id });
         return order;
     }
 

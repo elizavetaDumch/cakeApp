@@ -1,4 +1,4 @@
-import { $authHost } from "./index";
+import { $authHost, $host } from "./index";
 
 export const createOrder = async (formData) => {
     const { data } = await $authHost.post("api/order", formData);
@@ -12,5 +12,11 @@ export const fetchOrders = async () => {
 
 export const fetchOrder = async (id) => {
     const { data } = await $authHost.get(`api/order/${id}`);
+    return data;
+};
+
+// заказы всех пользователей
+export const fetchAllOrders = async () => {
+    const { data } = await $host.get(`api/order/all`);
     return data;
 };
