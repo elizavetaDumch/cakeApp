@@ -5,12 +5,12 @@ const Api_Error = require ('../error/Api_Error')
 class Type_Controller {
     async create (req,res) {
        
-        const {name} = req.body
-        const type = await Type.create({name})
+        const {name, weight1} = req.body
+        const type = await Type_cake.create({name})
         
-        if (weight1, weight2) {
+        if (weight1) {
             weight1 = JSON.parse(weight1)
-            weight2 = JSON.parse(weight2)
+            /* weight2 = JSON.parse(weight2) */
 
             //для первой категории веса
             weight1.forEach(i =>
@@ -21,13 +21,13 @@ class Type_Controller {
                 })
             )
            //для второй категории веса
-            weight2.forEach(i =>
+          /*   weight2.forEach(i =>
                 Weight.create({
                     weight: i.weight,
                     price: i.price,
                     typeCakeId: type.id
                 })
-            )
+            ) */
         }
         return res.json(type)
     }

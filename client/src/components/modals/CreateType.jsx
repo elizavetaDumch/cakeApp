@@ -1,15 +1,20 @@
 import React, {useContext, useEffect, useState} from 'react';
 import { Button, Form, Modal, Row, Col } from 'react-bootstrap';
 import {Context} from "../../index";
-import {createType, fetchTypes} from "../../http/cakeAPI"
+import {createType, createWeight, fetchTypes, fetchWeights} from "../../http/cakeAPI"
 import {observer} from "mobx-react-lite";
 import FormRange from 'react-bootstrap/esm/FormRange';
 
-const CreateType = ({ show, onHide }) => {
-
+const CreateType = observer(({ show, onHide }) => {
+    const {cake} = useContext (Context)
     const [name, setName] = useState('')
     const [weight1, setWeight1] = useState([])
     const [weight2, setWeight2] = useState([])
+
+    /* useEffect(() => {
+        fetchTypes().then(data => cake.setTypes(data)) 
+        fetchWeights().then(data => cake.setWeight(data)) 
+    }, []) */
 
     const addWeight1 = () => {
         setWeight1([...weight1, {weight: '', price: '', number: Date.now()}])
@@ -26,10 +31,12 @@ const CreateType = ({ show, onHide }) => {
     const addType = () => {
         const formData = new FormData()
         formData.append('name', name)        
-        formData.append('weight', JSON.stringify(weight1))
-        createType(formData).then(data => onHide())
-        
+       // formData.append('weight', JSON.stringify(weight1))
+        formData.append('typeCakeId', 4)
+        createType(formData).then(data => onHide())        
     }
+
+   
 
     return (
         <Modal
@@ -92,6 +99,6 @@ const CreateType = ({ show, onHide }) => {
             </Modal.Footer>
         </Modal>
     );
-};
+});
 
 export default CreateType;
