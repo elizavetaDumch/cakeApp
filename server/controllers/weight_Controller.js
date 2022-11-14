@@ -1,12 +1,17 @@
 const { Weight } = require("../models/models")
+const Api_Error = require('../error/Api_Error');
+
 
 class Weight_Controller {
-    async create(req, res) {
-        let {weight_one, price_weight_one} = req.body
-        const weight_1 = await Weight.create({weight_one, price_weight_one})
-       /*  const weight_2 = await Weight.create({ weight_two, price_weight_two})        */
-        return res.json(weight_1)
-        
+    async create(req, res, next) {
+        try {
+            const { weight, price, typeCakeId } = req.body
+            const weight_1 = await Weight.create({ weight, price, typeCakeId })
+            return res.json(weight_1)
+        } catch (e) {
+            next(Api_Error.bad_Request(e))
+        }
+
     }
 
     async getAll(req, res) {

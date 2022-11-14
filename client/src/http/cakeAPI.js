@@ -5,8 +5,8 @@ export const createType = async (type) => {
     return data
 }
 
-export const createWeight = async (weight) => {
-    const { data } = await $authHost.post('api/weight', weight)
+export const createWeight = async (weight, price, typeCakeId) => {
+    const { data } = await $authHost.post('api/weight', { weight, price, typeCakeId })
     return data
 }
 
@@ -26,6 +26,6 @@ export const fetchCakes = async (typeCakeId, page, limit) => {
 }
 
 export const fetchWeights = async (typeCakeId) => {
-    const { data } = await $host.get('api/weight', {params: { typeCakeId }})
+    const { data } = await $host.get('api/weight', { params: { typeCakeId } })
     return data
 }

@@ -30,7 +30,7 @@ const Type_cake = sequelize.define("type_cake", {
 
 const Weight = sequelize.define("weight", {
     id: { type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true },
-    weight: { type: DataTypes.STRING, allowNull: false },
+    weight: { type: DataTypes.STRING },
     price: { type: DataTypes.INTEGER },
 });
 
