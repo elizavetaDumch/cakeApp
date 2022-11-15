@@ -16,7 +16,7 @@ export const fetchTypes = async () => { //fetch получение
 }
 
 export const createCake = async (cake) => {
-    const { data } = await $authHost.post('api/cake', cake)
+    const { data } = await $host.post('api/cake', cake)
     return data
 }
 

@@ -12,7 +12,6 @@ const CreateCake = observer(({ show, onHide }) => {
     const [description, setDescription] = useState('')
     const [price, setPrice] = useState(0)
     const [file, setFile] = useState(null)
-    const [value, setValue] = useState('')
 
     useEffect(() => {
         fetchTypes().then(data => cake.setTypes(data))       
@@ -23,11 +22,16 @@ const CreateCake = observer(({ show, onHide }) => {
     }
 
     const addCake = () => {
-        createCake({name: value}).then(data => {
-            setValue('')
-            onHide()
-        })
+        const formData = new FormData()
+        formData.append('name', name)
+        formData.append('description', description)
+        formData.append('img', file)
+        formData.append('price', price)
+        formData.append('typeCakeId', cake.selectedType.id)
+        createCake(formData).then(data => onHide())
     }
+
+    console.log(cake.selectedType.id)
 
     return (
         <Modal
@@ -43,11 +47,6 @@ const CreateCake = observer(({ show, onHide }) => {
             </Modal.Header>
             <Modal.Body>
                 <Form> 
-                    {/* <Form.Control 
-                        value={value}
-                        onChange = {e => setValue(e.target.value)}
-                        placeholder={"Введите название дизайна"} 
-                    /> */}
                     <Dropdown>
                         <Dropdown.Toggle>{cake.selectedType.name || "Выберите тип"}</Dropdown.Toggle>
                         <DropdownMenu>  {/* <Dropdown.Item key={type.id}>{type.name}</Dropdown.Item> */} 
