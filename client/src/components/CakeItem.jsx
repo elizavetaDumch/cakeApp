@@ -45,6 +45,8 @@ const CakeItem = ({ cake }) => {
         toast("Товар добавлен в корзину");
     };
 
+    console.log()
+
     return (
         <Col className="mt-5">
             <Card border={"dark"} style={{ width: 250, left: "20%" }}>
@@ -69,7 +71,7 @@ const CakeItem = ({ cake }) => {
                                     key={i}
                                     className="p-3 me-2"
                                     onClick={() => clickWeightPrice(1)}
-                                    border={weight[0] ? "danger" : "light"}
+                                    border={weight[1].id === selectedWeight.id ? "danger" : "light"}
                                 >
                                     Вес: {weights.weight} Цена: {weights.price}{" "}
                                     руб.
@@ -80,7 +82,7 @@ const CakeItem = ({ cake }) => {
                                     key={i}
                                     className="p-3 me-2"
                                     onClick={() => clickWeightPrice(0)}
-                                    border={weight[0] ? "danger" : "light"}
+                                    border={weight[0].id === selectedWeight.id ? "danger" : "light"}
                                 >
                                     Вес: {weights.weight} Цена: {weights.price}{" "}
                                     руб.
