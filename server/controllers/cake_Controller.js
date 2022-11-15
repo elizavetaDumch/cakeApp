@@ -8,11 +8,11 @@ class Cake_Controller {
     async create(req, res, next) {
 
         try {
-            let { name, description, price } = req.body
+            let { name, description, price, typeCakeId } = req.body
             const { img } = req.files
             let fileName = uuid.v4() + ".jpg"
             img.mv(path.resolve(__dirname, '..', 'static', fileName)) //адаптирует путь к ОС (парам: 1 - путь до тек. папки с контроллерами, 2 - вернуться на директорию назад, 3 - папка статик)
-            const cake = await Cake.create({ name, description, img: fileName, price })
+            const cake = await Cake.create({ name, description, img: fileName, price, typeCakeId })
             
             /* здесь нужно выбор типа организовать (не создание) */
             /* if (type) {
