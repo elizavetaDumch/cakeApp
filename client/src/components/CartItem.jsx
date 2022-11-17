@@ -1,12 +1,17 @@
 import React, { useContext } from "react";
-import { Card, Col, Button } from "react-bootstrap";
+import { Card, Col, Button, Dropdown } from "react-bootstrap";
 import { deleteProductFromCart } from "../http/cartAPI";
 import Image from "react-bootstrap/Image";
 import { toast } from "react-toastify";
 import { Context } from "../index";
+import DropdownMenu from 'react-bootstrap/esm/DropdownMenu';
 
 const CartItem = ({ product }) => {
     const { cart } = useContext(Context);
+
+    /* useEffect(() => {
+        fetchFilling().then(data => product.setTypes(data))       
+    }, []) */
 
     const removeFromCart = async (cartProductId) => {
         const data = await deleteProductFromCart(cartProductId);
@@ -15,7 +20,7 @@ const CartItem = ({ product }) => {
     };
 
     return (
-        <Col className="mt-5">
+        <Col className="mt-5">         
             <Card border={"dark"} style={{ width: 250 }}>
                 <Image
                     width={248}
@@ -25,22 +30,56 @@ const CartItem = ({ product }) => {
                 <Card.Body>
                     <Card.Title>{product.cake.name}</Card.Title>
                     <Card.Text>{product.cake.description}</Card.Text>
-                    <Card.Text>
-                        Цена за декор: {product.cake.price} руб.
+                    <Card.Text >
+                        Цена за декор: <b>{product.cake.price} руб</b>
                     </Card.Text>
                     <Card.Text>
-                        Вес: {product.weight.weight} ({product.weight.price} руб.)
+                        Вес: <b>{product.weight.weight}</b> ({product.weight.price} руб.)
                     </Card.Text>
                     <Card.Text>
                         Итоговая цена:
-                        {product.cake.price + product.weight.price} руб.
+                        <b> {product.cake.price + product.weight.price} руб</b>
                     </Card.Text>
-                    <Card.Text>Кол-во: {product.quantity} шт. </Card.Text>
+                    <Card.Text>Кол-во: <b>{product.quantity} шт </b></Card.Text>
                     <Card.Text>
                         Сумма:
-                        {product.quantity * (product.cake.price + product.weight.price)} руб.
+                        <b> {product.quantity * (product.cake.price + product.weight.price)} руб</b>
                     </Card.Text>
+
+                    <Dropdown>
+                        <Dropdown.Toggle variant="outline-warning" className='mb-2' style={{color:"black"}}> Выберите начинку
+                            <DropdownMenu>
+                                <Dropdown.Item>
+                                    Ягодный микс
+                                </Dropdown.Item>
+                                <Dropdown.Item>
+                                    Шоколад
+                                </Dropdown.Item>
+                                <Dropdown.Item>
+                                    Солёная карамель
+                                </Dropdown.Item>
+                            </DropdownMenu>
+                        </Dropdown.Toggle>
+                    </Dropdown>
+
+                    <Dropdown>
+                        <Dropdown.Toggle variant="outline-warning" className='mt-2 mb-2' style={{color:"black"}}> Выберите корж
+                            <DropdownMenu>
+                                <Dropdown.Item>
+                                    Красный бархат
+                                </Dropdown.Item>
+                                <Dropdown.Item>
+                                    Шоколадный бисквит
+                                </Dropdown.Item>
+                                <Dropdown.Item>
+                                    Ванильный бисквит
+                                </Dropdown.Item>
+                            </DropdownMenu>
+                        </Dropdown.Toggle>
+                    </Dropdown>
+
                     <Button
+                        className='mt-3'
                         variant="danger"
                         onClick={() => removeFromCart(product.id)}
                     >

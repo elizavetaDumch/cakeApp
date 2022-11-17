@@ -80,7 +80,7 @@ const CakeItem = ({ cake }) => {
                                 <Card
                                     style={{ cursor: "pointer" }}
                                     key={i}
-                                    className="p-3 me-2"
+                                    className="p-3 me-2"                                    
                                     onClick={() => clickWeightPrice(0)}
                                     border={weight[0].id === selectedWeight.id ? "danger" : "light"}
                                 >
@@ -96,7 +96,7 @@ const CakeItem = ({ cake }) => {
                     <Card.Text>Итоговая цена: {result} руб. </Card.Text>
 
                     <Button
-                        variant="light"
+                        variant={"outline-warning"}
                         style={{ marginLeft: "150px" }}
                         onClick={() => clickAddToCart()}
                     >

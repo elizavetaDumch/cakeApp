@@ -29,6 +29,7 @@ const OrderForm = () => {
                     <input
                         {...register("name", { required: true })}
                         className="form-control"
+                        style={{width:"200px"}}
                         placeholder="Ваше имя"
                     />
                     {errors.name && (
@@ -41,11 +42,16 @@ const OrderForm = () => {
                     )}
                 </div>
                 <div className="mb-3">
-                    <label className="form-label">Ваш телефон</label>
+                    <label className="form-label">Ваш телефон</label>                    
                     <input
                         {...register("phone", { required: true })}
-                        className="form-control"
+                        className="form-control raz"
+                        style={{width:"200px"}}
+                        type="number"
+                        pattern="^[ 0-9]+$"
                         placeholder="Ваш телефон"
+                        onInput={(event)=>event.target.value=event.target.value.slice(0,event.target.maxLength)} 
+                        maxLength="12"                
                     />
                     {errors.phone && (
                         <p
@@ -56,7 +62,7 @@ const OrderForm = () => {
                         </p>
                     )}
                 </div>
-                <Button variant="primary" type="submit" className="mb-5">
+                <Button variant="warning" type="submit" className="mb-5">
                     Оформить заказ
                 </Button>
             </form>

@@ -29,3 +29,8 @@ export const fetchWeights = async (typeCakeId) => {
     const { data } = await $host.get('api/weight', { params: { typeCakeId } })
     return data
 }
+
+/* export const fetchFilling = async () => { //fetch получение
+    const { data } = await $host.get('api/type_cake')
+    return data
+} */

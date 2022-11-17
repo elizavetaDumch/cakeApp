@@ -20,15 +20,17 @@ const Order = () => {
     }, []);
 
     const orderDetails = (
-        <>
-            <h2 className="text-center">Ваш заказ успешно сформирован</h2>
+        <> <br></br>
+        <Container className="d-flex flex-column rounded border bg-white"  style={{width:"400px", marginTop: "100px"}}>
+            <h4 className="text-center">Ваш заказ успешно сформирован</h4>
             <div className="my-4">
-                <div>Номер заказа: #{order.id}</div>
-                <div>Сумма заказа: {order.price} руб.</div>
-                <div>Имя: {order.name}</div>
-                <div>Телефон: {order.phone}</div>
+                <div>Номер заказа: <b>№{order.id}</b></div>
+                <div>Сумма заказа: <b>{order.price} руб</b></div>
+                <div>Имя: <b>{order.name}</b></div>
+                <div>Телефон: <b>{order.phone}</b></div>
             </div>
-            <h4 className="text-center">Состав заказа</h4>
+            </Container>
+            <h4 className="text-center mt-5">Состав заказа:</h4>
             <Row className="mb-5">
                 {order.order_products && order.order_products.map((product) => (
                     <OrderProductItem key={product.id} product={product} />

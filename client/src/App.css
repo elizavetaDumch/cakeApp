@@ -11,7 +11,7 @@ body{
 }
 
 .navbar-light {
-  background-color: #f8f7efee;
+  background-color: #f7f5e6;
   box-shadow: 5px 5px 5px 0px rgba(0,0,0,0.3);
 }
 
@@ -116,3 +116,11 @@ body{
   h3 {
     text-align:center;
 }
+
+.raz { 
+  -moz-appearance: textfield;
+}
+.raz::-webkit-inner-spin-button { 
+  display: none;
+}
+

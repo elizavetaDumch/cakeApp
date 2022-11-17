@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Container } from "react-bootstrap";
 import OrderItem from "../components/OrderItem";
-import { fetchOrders } from "../http/orderAPI"; 
+import { fetchOrders } from "../http/orderAPI";
 import Spinner from "../components/Spinner";
 
 const Orders = () => {
@@ -17,7 +17,8 @@ const Orders = () => {
 
     const orderList = (
         <>
-            <h2 className="text-center">Заказы</h2>
+            <h4 className="my-1 p-2">История заказов</h4>
+            <h2 className="text-center my-5 p-2">Ваши заказы</h2>
             {orders.map((order) => (
                 <OrderItem key={order.id} order={order} />
             ))}

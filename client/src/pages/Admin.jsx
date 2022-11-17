@@ -12,9 +12,9 @@ const Admin = () => {
     const [ordersVisible, setOrdersVisible] = useState(false)
 
     return (
-        <Container className="d-flex flex-column">
-            <h3 className="mt-4 p-2">Админ панель</h3>
-            <Button
+        <Container className="d-flex flex-column rounded border bg-white"  style={{width:"350px", marginTop: "250px"}}>
+            <h3 style={{ textAlign: "center", marginTop: "50px" }}>Админ панель</h3>
+            <Button 
                 variant={"outline-dark"}
                 className="mt-4 p-2"
                 onClick={() => setCakeVisible(true)}
@@ -28,7 +28,7 @@ const Admin = () => {
             >
                 Добавить тип изделия
             </Button>
-            <Button variant={"outline-dark"} className="mt-4 p-2">
+            {/* <Button variant={"outline-dark"} className="mt-4 p-2">
                 Добавить начинку
             </Button>
             <Button
@@ -36,8 +36,8 @@ const Admin = () => {
                 className="mt-4 p-2"
             >
                 Добавить корж
-            </Button>
-            <Button
+            </Button> */}
+            <Button style={{ textAlign: "center", marginBottom: "70px" }}
                 variant={"outline-dark"}
                 className="mt-4 p-2"
                 onClick={() => setOrdersVisible(true)}

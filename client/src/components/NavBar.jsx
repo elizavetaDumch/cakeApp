@@ -26,14 +26,16 @@ const NavBar = observer(() => {
     }
 
     return (
-        <Navbar>
+        <Navbar fixed="top">
             <Container>
                 <Navbar.Brand
                     src={logo}
                     onClick={() => history.push(MAIN_SHOP_ROUTE)}
                 >
-                    <Image width="100px" src={logo} />
-                    CakeApp
+                    <Image width="75px" className='ms-2' src={logo} />
+                   {/*  <h5 className='ms-1'>CakeApp</h5> */}
+                    <label>CakeApp</label>
+                    {/* <label><b>CakeApp</b></label> */}
                 </Navbar.Brand>
                 {user.isAuth ? (
                     <Nav className="ml-auto">
