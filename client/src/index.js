@@ -5,6 +5,7 @@ import UserStore from './store/UserStore';
 import App from './App';
 import CakeStore from './store/CakeStore';
 import CartStore from "./store/CartStore";
+import './fonts/ofont.ru_Montserrat Alternates.ttf';
 
 export const Context = createContext(null)
 

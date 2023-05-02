@@ -26,7 +26,7 @@ class User_Controller {
             }
             const hashPassword = await bcrypt.hash(password, 5)
             const user = await User.create({ email, roles, password: hashPassword })
-            const order = await Order.create({ userId: user.id })
+          //  const order = await Order.create({ userId: user.id })
             const token = generateJwt(user.id, user.email, user.roles)
 
             //при регистрации пользователя данные отправляются на мою почту, но я закомментила, чтобы у тебя не возникало ошибок

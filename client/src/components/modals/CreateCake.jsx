@@ -48,7 +48,7 @@ const CreateCake = observer(({ show, onHide }) => {
             <Modal.Body>
                 <Form> 
                     <Dropdown>
-                        <Dropdown.Toggle>{cake.selectedType.name || "Выберите тип"}</Dropdown.Toggle>
+                        <Dropdown.Toggle variant="warning">{cake.selectedType.name || "Выберите тип"}</Dropdown.Toggle>
                         <DropdownMenu>  {/* <Dropdown.Item key={type.id}>{type.name}</Dropdown.Item> */} 
                             {cake.types.map( type =>                                 
                                 <Dropdown.Item 

@@ -22,7 +22,7 @@ const Order = () => {
     const orderDetails = (
         <> <br></br>
         <Container className="d-flex flex-column rounded border bg-white"  style={{width:"400px", marginTop: "100px"}}>
-            <h4 className="text-center">Ваш заказ успешно сформирован</h4>
+            <h4 className="text-center mt-3">Ваш заказ успешно сформирован</h4>
             <div className="my-4">
                 <div>Номер заказа: <b>№{order.id}</b></div>
                 <div>Сумма заказа: <b>{order.price} руб</b></div>

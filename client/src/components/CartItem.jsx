@@ -21,14 +21,14 @@ const CartItem = ({ product }) => {
 
     return (
         <Col className="mt-5">         
-            <Card border={"dark"} style={{ width: 250 }}>
+            <Card border={"dark"} style={{ width: 300, height: 800 }}>
                 <Image
-                    width={248}
-                    height={248}
+                    width={298}
+                    height={298}
                     src={process.env.REACT_APP_API_URL + product.cake.img}
                 />
                 <Card.Body>
-                    <Card.Title>{product.cake.name}</Card.Title>
+                    <Card.Title><b>{product.cake.name}</b></Card.Title>
                     <Card.Text>{product.cake.description}</Card.Text>
                     <Card.Text >
                         Цена за декор: <b>{product.cake.price} руб</b>
@@ -47,7 +47,7 @@ const CartItem = ({ product }) => {
                     </Card.Text>
 
                     <Dropdown>
-                        <Dropdown.Toggle variant="outline-warning" className='mb-2' style={{color:"black"}}> Выберите начинку
+                        <Dropdown.Toggle variant="outline-warning" className='mb-2' style={{color:"black", width: 225}}> Выберите начинку
                             <DropdownMenu>
                                 <Dropdown.Item>
                                     Ягодный микс
@@ -63,7 +63,7 @@ const CartItem = ({ product }) => {
                     </Dropdown>
 
                     <Dropdown>
-                        <Dropdown.Toggle variant="outline-warning" className='mt-2 mb-2' style={{color:"black"}}> Выберите корж
+                        <Dropdown.Toggle variant="outline-warning" className='mt-2 mb-2' style={{color:"black", width: 225}}> Выберите корж
                             <DropdownMenu>
                                 <Dropdown.Item>
                                     Красный бархат

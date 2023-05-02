@@ -13,18 +13,20 @@ const Admin = () => {
 
     return (
         <Container className="d-flex flex-column rounded border bg-white"  style={{width:"350px", marginTop: "250px"}}>
-            <h3 style={{ textAlign: "center", marginTop: "50px" }}>Админ панель</h3>
+            <h3 style={{ textAlign: "center", marginTop: "50px" }}>Админ панель</h3> 
             <Button 
-                variant={"outline-dark"}
+                variant={"outline-warning"}
                 className="mt-4 p-2"
                 onClick={() => setCakeVisible(true)}
+                style={{color:"black"}}
             >
                 Добавить изделие
             </Button>
             <Button
-                variant={"outline-dark"}
+                variant={"outline-warning"}
                 className="mt-4 p-2"
                 onClick={() => setTypeVisible(true)}
+                style={{color:"black"}}
             >
                 Добавить тип изделия
             </Button>
@@ -37,10 +39,11 @@ const Admin = () => {
             >
                 Добавить корж
             </Button> */}
-            <Button style={{ textAlign: "center", marginBottom: "70px" }}
-                variant={"outline-dark"}
+            <Button style={{color:"black", textAlign: "center", marginBottom: "70px" }}
+                variant={"outline-warning"}                
                 className="mt-4 p-2"
                 onClick={() => setOrdersVisible(true)}
+                
             >
                 Просмотреть заказы
             </Button>

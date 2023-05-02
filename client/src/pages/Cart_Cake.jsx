@@ -17,14 +17,15 @@ const Cart_Cake = observer(() => {
 
     return (
         <Container className="my-4">
-            <h2 className='mb-3' style={{ textAlign: "center", marginTop: "150px" }} >Корзина</h2>
+            <h2 className='mb-3' style={{ textAlign: "center", marginTop: "150px" }} > <b>Корзина</b></h2>
             <Row>
                 {cart.products.map((product) => (
                     <CartItem key={product.id} product={product} />
                 ))}
             </Row>
-            <Card border={"warning"} style={{ height:50, width: 350, marginTop: "50px"}}>
-                <h5 style={{ textAlign: "center", marginTop: "10px" }}>Итоговая стоимость заказа: {sum} руб</h5>
+            {/* className="m-auto align-self-center" КАК СДЕЛАТЬ ПО ЦЕНТРУ */}
+            <Card border={"warning"} style={{ height: 70, width: 350, marginTop: "70px", margin: "0 auto" }}>
+                <h5 style={{ textAlign: "center", marginTop: "10px" }}>Итоговая стоимость заказа: <b>{sum} руб</b></h5>
             </Card>
 
 

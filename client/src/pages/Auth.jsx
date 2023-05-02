@@ -67,8 +67,8 @@ const Auth = observer(() => {
                         />
                     </div>
 
-                    <div className="d-grid">
-                        <Button 
+                    <div className="d-grid ">
+                        <Button  variant="warning"
                             onClick={click}
                         >
                             {isLogin ? 'Войти' : 'Регистрация'}

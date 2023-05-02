@@ -4,6 +4,7 @@ import Order from "./pages/Order";
 import Orders from "./pages/Orders";
 import Auth from "./pages/Auth";
 import Main_Shop from "./pages/Main_Shop";
+import About from "./pages/About";
 import {
     ADMIN_ROUTE,
     CART_CAKE_ROUTE,
@@ -12,6 +13,8 @@ import {
     MAIN_SHOP_ROUTE,
     LOGIN_ROUTE,
     REGISTRATION_ROUTE,
+    ABOUT_ROUTE,
+
 } from "./utils/consts";
 
 export const authRouters = [
@@ -45,5 +48,9 @@ export const publicRouters = [
     {
         path: MAIN_SHOP_ROUTE,
         Component: Main_Shop,
+    },
+    {
+        path: ABOUT_ROUTE,
+        Component: About,
     },
 ];

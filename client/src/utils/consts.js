@@ -5,3 +5,4 @@ export const CART_CAKE_ROUTE = "/cart";
 export const ORDER_ROUTE = "/orders/:id";
 export const ORDERS_ROUTE = "/orders";
 export const MAIN_SHOP_ROUTE = "/cakes";
+export const ABOUT_ROUTE = "/about";

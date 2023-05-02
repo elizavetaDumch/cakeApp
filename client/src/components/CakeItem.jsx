@@ -6,9 +6,13 @@ import { fetchWeights } from "../http/cakeAPI";
 import { addProductToCart } from "../http/cartAPI";
 import { toast } from "react-toastify";
 import { Context } from "../index";
+import { useHistory } from 'react-router-dom';
+import {LOGIN_ROUTE} from '../utils/consts';
 
-const CakeItem = ({ cake }) => {
-    const { cart } = useContext(Context);
+const CakeItem = ({ cake }) => { 
+    const { user, cart } = useContext(Context)   
+
+    const history = useHistory()
 
     const [weight, setWeight] = useState([]);
     const [result, setResult] = useState(0);
@@ -40,27 +44,31 @@ const CakeItem = ({ cake }) => {
             fillingId: null, // TODO - set the CartProduct filling
             doughId: null, // TODO - set the CartProduct dough
         };
+        if (!user.isAuth){
+            history.push(LOGIN_ROUTE) 
+        }
         const data = await addProductToCart(cartProduct);
         cart.products = data.cart_products;
         toast("Товар добавлен в корзину");
+        
     };
 
     console.log()
 
     return (
         <Col className="mt-5">
-            <Card border={"dark"} style={{ width: 250, left: "20%" }}>
+            <Card border={"dark"}  style={{ width: 300, left: "20%", height: 750, position: "relative"}}>
                 <Image
-                    width={248}
-                    height={248}
+                    width={298}
+                    height={298}
                     src={process.env.REACT_APP_API_URL + cake.img}
                 />
 
                 <Card.Body>
-                    <Card.Title>{cake.name}</Card.Title>
+                    <Card.Title><b>{cake.name}</b></Card.Title>
                     <Card.Text>{cake.description}</Card.Text>
 
-                    <Card.Text>Цена за декор: {cake.price} руб.</Card.Text>
+                    <Card.Text className="ms-1">Декор: <b>{cake.price}</b> руб.</Card.Text>
 
                     {/* додумать потом. Активная кнопка - красная */}
                     {weight.map(
@@ -73,19 +81,25 @@ const CakeItem = ({ cake }) => {
                                     onClick={() => clickWeightPrice(1)}
                                     border={weight[1].id === selectedWeight.id ? "danger" : "light"}
                                 >
-                                    Вес: {weights.weight} Цена: {weights.price}{" "}
-                                    руб.
+                                    <Card.Text>
+                                        Вес: <b>{weights.weight}</b>{" "}
+                                        Цена: <b>{weights.price} </b> 
+                                    </Card.Text>
+
                                 </Card>
                             ) : (
                                 <Card
                                     style={{ cursor: "pointer" }}
                                     key={i}
-                                    className="p-3 me-2"                                    
+                                    className="p-3 me-2"
                                     onClick={() => clickWeightPrice(0)}
                                     border={weight[0].id === selectedWeight.id ? "danger" : "light"}
                                 >
-                                    Вес: {weights.weight} Цена: {weights.price}{" "}
-                                    руб.
+                                    <Card.Text >
+                                        Вес: <b>{weights.weight}</b>{" "}
+                                        Цена: <b>{weights.price}</b> руб.
+                                    </Card.Text>
+
                                 </Card>
                             )
 
@@ -93,14 +107,15 @@ const CakeItem = ({ cake }) => {
                         // <button key={i}  onClick={() => clickWeightPrice(0)}>Вес: {weight.weight} Цена: {weight.price} руб.</button>
                     )}
 
-                    <Card.Text>Итоговая цена: {result} руб. </Card.Text>
+                    <Card.Text className="p-3 ms-4">Итог: <b>{result} руб.</b>  </Card.Text>
 
-                    <Button
+                    <Button                        
                         variant={"outline-warning"}
-                        style={{ marginLeft: "150px" }}
+                        style={{ marginLeft: "180px", marginBottom: "5", position: "absolute", bottom: 30 }}                        
                         onClick={() => clickAddToCart()}
                     >
                         <Image src={basket} width={50} height={50} />
+                        
                     </Button>
                 </Card.Body>
 

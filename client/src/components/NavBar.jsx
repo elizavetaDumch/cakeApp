@@ -3,7 +3,7 @@ import { Context } from '../index';
 import { Navbar, Nav, Container, Button } from 'react-bootstrap'
 import { observer } from "mobx-react-lite"
 import { useHistory } from 'react-router-dom';
-import {ADMIN_ROUTE, MAIN_SHOP_ROUTE, LOGIN_ROUTE, CART_CAKE_ROUTE, ORDERS_ROUTE} from '../utils/consts';
+import { ADMIN_ROUTE, MAIN_SHOP_ROUTE, LOGIN_ROUTE, CART_CAKE_ROUTE, ORDERS_ROUTE, ABOUT_ROUTE } from '../utils/consts';
 import logo from '../assets/logo.png'
 import Image from 'react-bootstrap/Image';
 import jwtDecode from 'jwt-decode';
@@ -13,6 +13,7 @@ const NavBar = observer(() => {
     const { user, cart } = useContext(Context)
 
     const history = useHistory()
+
     const logOut = () => {
         user.setUser({})
         user.setIsAuth(false)
@@ -25,6 +26,22 @@ const NavBar = observer(() => {
         decodeRoles = jwtDecode(localStorage.token)
     }
 
+    const checkAuthCart = () => {
+        if (!user.isAuth) {
+            history.push(LOGIN_ROUTE)
+        } else {
+            history.push(CART_CAKE_ROUTE)
+        }
+    }
+
+    const checkAuthOrders = () => {
+        if (!user.isAuth) {
+            history.push(LOGIN_ROUTE)
+        } else {
+            history.push(ORDERS_ROUTE)
+        }
+    }
+
     return (
         <Navbar fixed="top">
             <Container>
@@ -32,19 +49,43 @@ const NavBar = observer(() => {
                     src={logo}
                     onClick={() => history.push(MAIN_SHOP_ROUTE)}
                 >
-                    <Image width="75px" className='ms-2' src={logo} />
-                   {/*  <h5 className='ms-1'>CakeApp</h5> */}
-                    <label>CakeApp</label>
+                    <Image width="55px" className='ms-2' src={logo} style={{ marginRight: "15px" }} />
+                    {/*  <h5 className='ms-1'>CakeApp</h5> */}
+                    <b>CakeApp</b>
                     {/* <label><b>CakeApp</b></label> */}
                 </Navbar.Brand>
+
+                <Nav className="ml-auto">
+                    <Button
+                        variant={"outline-dark"}
+                        onClick={() => history.push(ABOUT_ROUTE)}
+                        className="mx-2"
+                    >
+                        <b>О нас</b>
+                    </Button>
+                    <Button
+                        variant={"outline-dark"}
+                        onClick={() => checkAuthOrders()}
+                    >
+                       <b>История заказов</b> 
+                    </Button>
+                    <Button
+                        variant={"outline-dark"}
+                        onClick={() => checkAuthCart()}
+                        className="mx-2"
+                    >
+                      <b>Корзина</b>  <b style={{color: "orange"}}>({cart.quantity})</b>
+                    </Button>
+                </Nav>
                 {user.isAuth ? (
                     <Nav className="ml-auto">
                         {decodeRoles.roles === "ADMIN" && (
                             <Button
-                                variant={"outline-dark"}
+                                variant={"warning"}
                                 onClick={() => history.push(ADMIN_ROUTE)}
+                                
                             >
-                                Админ панель
+                                <b>Админ панель</b>
                             </Button>
                         )}
 
@@ -53,7 +94,7 @@ const NavBar = observer(() => {
                             className="ms-2"
                             onClick={() => logOut()}
                         >
-                            Выйти
+                            <b>Выйти</b>
                         </Button>
                     </Nav>
                 ) : (
@@ -62,25 +103,12 @@ const NavBar = observer(() => {
                             variant={"outline-dark"}
                             onClick={() => history.push(LOGIN_ROUTE)}
                         >
-                            Авторизация
+                            <b>Авторизация</b>
                         </Button>
+
                     </Nav>
+
                 )}
-                <Nav className="ml-auto">
-                    <Button
-                        variant={"outline-dark"}
-                        onClick={() => history.push(CART_CAKE_ROUTE)}
-                        className="mx-2"
-                    >
-                        Корзина ({cart.quantity})
-                    </Button>
-                    <Button
-                        variant={"outline-dark"}
-                        onClick={() => history.push(ORDERS_ROUTE)}
-                    >
-                        История заказов
-                    </Button>
-                </Nav>
             </Container>
         </Navbar>
     );
