@@ -21,7 +21,7 @@ body{
 .navbar-light {
   background-color: #f7f5e6;
   /* box-shadow: 5px 5px 5px 0px rgba(0,0,0,0.3); */
-  border: 2px solid #000;
+  border-bottom: 2px solid #000;
 }
 
 .navbar-light-footer {
@@ -194,4 +194,28 @@ body{
 .logoFooter {
   display: flex;
   justify-content: center;
+}
+
+.btn_Admin_Panel {
+  border:1px solid #000;
+}
+
+.instructButton {
+  border:1px solid #000;
+}
+
+.form-order{
+  margin-top: 30px;
+  margin-bottom: 50px;
+  margin-left: 500px;
+  border:1px solid #000;
+  width: 300px;
+  background: #ffffff;
+  border-radius: 7px;
+
+}
+
+.elem-order-form {
+  margin-top: 50px;
+  margin-left: 50px;
 }

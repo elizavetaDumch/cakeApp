@@ -23,48 +23,52 @@ const OrderForm = () => {
     return (
         <div className="my-5">
             <h2 className="text-center">Оформление заказа</h2>
-            <form onSubmit={handleSubmit(onSubmit)}>
-                <div className="mb-3">
-                    <label className="form-label">Ваше имя</label>
-                    <input
-                        {...register("name", { required: true })}
-                        className="form-control"
-                        style={{width:"200px"}}
-                        placeholder="Ваше имя"
-                    />
-                    {errors.name && (
-                        <p
-                            className="invalid-feedback"
-                            style={{ display: "block" }}
-                        >
-                            Ваше имя обязательно для заполнения.
-                        </p>
-                    )}
+            <form className="form-order" onSubmit={handleSubmit(onSubmit)}>
+                <div className="elem-order-form">
+                    <div className="mb-3">
+                        <label className="form-label">Ваше имя</label>
+                        <input
+                            {...register("name", { required: true })}
+                            className="form-control"
+                            style={{ width: "200px" }}
+                            placeholder="Ваше имя"
+                        />
+                        {errors.name && (
+                            <p
+                                className="invalid-feedback"
+                                style={{ display: "block" }}
+                            >
+                                Ваше имя обязательно для заполнения.
+                            </p>
+                        )}
+                    </div>
+                    <div className="mb-3">
+                        <label className="form-label">Ваш телефон</label>
+                        <input
+                            {...register("phone", { required: true })}
+                            className="form-control raz"
+                            style={{ width: "200px" }}
+                            type="number"
+                            pattern="^[ 0-9]+$"
+                            placeholder="Ваш телефон"
+                            onInput={(event) => event.target.value = event.target.value.slice(0, event.target.maxLength)}
+                            maxLength="12"
+                        />
+                        {errors.phone && (
+                            <p
+                                className="invalid-feedback"
+                                style={{ display: "block" }}
+                            >
+                                Ваш телефон обязателен для заполнения.
+                            </p>
+                        )}
+                    </div>
+                    <Button variant="warning" type="submit" className="mb-5 ">
+                        Оформить заказ
+                    </Button>
                 </div>
-                <div className="mb-3">
-                    <label className="form-label">Ваш телефон</label>                    
-                    <input
-                        {...register("phone", { required: true })}
-                        className="form-control raz"
-                        style={{width:"200px"}}
-                        type="number"
-                        pattern="^[ 0-9]+$"
-                        placeholder="Ваш телефон"
-                        onInput={(event)=>event.target.value=event.target.value.slice(0,event.target.maxLength)} 
-                        maxLength="12"                
-                    />
-                    {errors.phone && (
-                        <p
-                            className="invalid-feedback"
-                            style={{ display: "block" }}
-                        >
-                            Ваш телефон обязателен для заполнения.
-                        </p>
-                    )}
-                </div>
-                <Button variant="warning" type="submit" className="mb-5">
-                    Оформить заказ
-                </Button>
+
+
             </form>
         </div>
     );

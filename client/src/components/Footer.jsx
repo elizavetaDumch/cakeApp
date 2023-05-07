@@ -30,35 +30,38 @@ export const Footer = () => {
 
         // </footer>
 
-        <footer class="footer-distributed">
+        // ВНИЗУ ТО, ЧТО НАДО
 
-            <Navbar className='navbar-light-footer'>
-                <Container>
-                    <Navbar.Brand
-                        src={logo}>
-                        <Image width="55px" className='ms-2' src={logo} style={{ marginRight: "15px" }} />
-                        {/*  <h5 className='ms-1'>CakeApp</h5> */}
-                        <b>CakeApp</b>
-                        {/* <label><b>CakeApp</b></label> */}
-                    </Navbar.Brand>
+        // <footer class="footer-distributed">
 
-                    <b>Рейтинг:</b>
-                    <Nav >
+        //     <Navbar className='navbar-light-footer'>
+        //         <Container>
+        //             <Navbar.Brand
+        //                 src={logo}>
+        //                 <Image width="55px" className='ms-2' src={logo} style={{ marginRight: "15px" }} />
+        //                 {/*  <h5 className='ms-1'>CakeApp</h5> */}
+        //                 <b>CakeApp</b>
+        //                 {/* <label><b>CakeApp</b></label> */}
+        //             </Navbar.Brand>
 
-                        <Image width="70px" src={rating} style={{ marginRight: "600px" }} />
-                    </Nav>
+        //             <b>Рейтинг:</b>
+        //             <Nav >
+
+        //                 <Image width="70px" src={rating} style={{ marginRight: "600px" }} />
+        //             </Nav>
 
 
-                    <Nav className="ml-auto">
-                        <label> © 2023 Copyright: CakeApp.com</label>
-                    </Nav>
+        //             <Nav className="ml-auto">
+        //                 <label> © 2023 Copyright: CakeApp.com</label>
+        //             </Nav>
 
-                    <Image width="55px" className='ms-2' src={camera} style={{ marginRight: "15px" }} />
+        //             <Image width="55px" className='ms-2' src={camera} style={{ marginRight: "15px" }} />
 
-                </Container>
-            </Navbar>
+        //         </Container>
+        //     </Navbar>
 
-        </footer>
+        // </footer>
+        <></>
     );
 };
 export default Footer;

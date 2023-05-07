@@ -15,7 +15,7 @@ const TypeBar = observer(() => {
                 <Card 
                 className='p-3 me-2'
                 style={{ cursor: 'pointer' }}
-                border={!cake.selectedType.id ? 'danger' : 'light'}
+                border={!cake.selectedType.id ? 'warning' : 'light'}
                 onClick={allCakes}
                 >
                     Все 
@@ -26,7 +26,7 @@ const TypeBar = observer(() => {
                         key={type.id}
                         className="p-3 me-2"
                         onClick={() => cake.setSelectedType(type)}
-                        border={type.id === cake.selectedType.id ? 'danger' : 'light'}
+                        border={type.id === cake.selectedType.id ? 'warning' : 'light'}
                     >
                         {type.name}
                     </Card>
