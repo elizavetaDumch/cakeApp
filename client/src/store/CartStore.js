@@ -4,9 +4,11 @@ import { fetchCart } from "../http/cartAPI";
 export default class CartStore {
     constructor() {
         this._products = [];
+
         fetchCart().then((cart) => {
             this._products = cart.cart_products;
         });
+      
         makeAutoObservable(this);
     }
 
@@ -26,4 +28,6 @@ export default class CartStore {
             .map((product) => product.quantity)
             .reduce((previous, current) => previous + current, 0);
     }
+
+   
 }

@@ -13,14 +13,14 @@ const Filling = sequelize.define("filling", {
     id: { type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true },
     type: { type: DataTypes.STRING, allowNull: false },
     description: { type: DataTypes.STRING },
-    img: { type: DataTypes.STRING, allowNull: false },
+    img: { type: DataTypes.STRING},
 });
 
 const Dough = sequelize.define("dough", {
     id: { type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true },
     type: { type: DataTypes.STRING, allowNull: false },
     description: { type: DataTypes.STRING },
-    img: { type: DataTypes.STRING, allowNull: false },
+    img: { type: DataTypes.STRING},
 });
 
 const Type_cake = sequelize.define("type_cake", {

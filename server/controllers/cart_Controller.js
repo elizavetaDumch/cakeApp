@@ -26,6 +26,10 @@ class Cart_Controller {
         const cart = await cartService.getUserCart(req.user.id);
         return res.json(cart);
     }
+
+    async updateCartItem(req, res) {
+        
+    }
 }
 
 module.exports = new Cart_Controller();

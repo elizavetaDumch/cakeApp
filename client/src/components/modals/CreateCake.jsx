@@ -1,20 +1,20 @@
-import React, {useContext, useEffect, useState} from 'react';
-import {Context} from "../../index";
+import React, { useContext, useEffect, useState } from 'react';
+import { Context } from "../../index";
 import { Button, Dropdown, Form, Modal } from 'react-bootstrap';
-import {createCake, fetchTypes, fetchCakes} from "../../http/cakeAPI"
+import { createCake, fetchTypes, fetchCakes } from "../../http/cakeAPI"
 import DropdownMenu from 'react-bootstrap/esm/DropdownMenu';
 import { observer } from 'mobx-react-lite';
 
 const CreateCake = observer(({ show, onHide }) => {
 
-    const {cake} = useContext(Context)
+    const { cake } = useContext(Context)
     const [name, setName] = useState('')
     const [description, setDescription] = useState('')
     const [price, setPrice] = useState(0)
     const [file, setFile] = useState(null)
 
     useEffect(() => {
-        fetchTypes().then(data => cake.setTypes(data))       
+        fetchTypes().then(data => cake.setTypes(data))
     }, [])
 
     const selectFile = e => {
@@ -46,52 +46,52 @@ const CreateCake = observer(({ show, onHide }) => {
                 </Modal.Title>
             </Modal.Header>
             <Modal.Body>
-                <Form> 
+                <Form>
                     <Dropdown>
                         <Dropdown.Toggle variant="warning">{cake.selectedType.name || "Выберите тип"}</Dropdown.Toggle>
-                        <DropdownMenu>  {/* <Dropdown.Item key={type.id}>{type.name}</Dropdown.Item> */} 
-                            {cake.types.map( type =>                                 
-                                <Dropdown.Item 
+                        <DropdownMenu>  {/* <Dropdown.Item key={type.id}>{type.name}</Dropdown.Item> */}
+                            {cake.types.map(type =>
+                                <Dropdown.Item
                                     onClick={() => cake.setSelectedType(type)}
-                                    key={type.id}                                    
+                                    key={type.id}
                                 >
                                     {type.name}
-                                </Dropdown.Item> 
+                                </Dropdown.Item>
                             )}
                         </DropdownMenu>
                     </Dropdown>
 
-                    <Form.Control 
+                    <Form.Control
                         className='mt-3'
                         value={name}
-                        onChange = {e => setName(e.target.value)}
-                        placeholder={"Введите название дизайна"} 
-                    /> 
+                        onChange={e => setName(e.target.value)}
+                        placeholder={"Введите название дизайна"}
+                    />
 
-                    <Form.Control 
+                    <Form.Control
                         className='mt-3'
                         value={description}
-                        onChange = {e => setDescription(e.target.value)}
-                        placeholder={"Введите описание"} 
-                    /> 
+                        onChange={e => setDescription(e.target.value)}
+                        placeholder={"Введите описание"}
+                    />
 
-                    <Form.Control 
+                    <Form.Control
                         className='mt-3'
                         value={price}
-                        onChange = {e => setPrice(Number(e.target.value))}
-                        placeholder={"Введите стоимость дизайна"} 
-                    /> 
+                        onChange={e => setPrice(Number(e.target.value))}
+                        placeholder={"Введите стоимость дизайна"}
+                    />
 
-                    <Form.Control 
+                    <Form.Control
                         className='mt-3'
                         type="file"
                         onChange={selectFile}
-                    /> 
+                    />
 
                 </Form>
             </Modal.Body>
             <Modal.Footer>
-                <Button  variant="outline-danger" onClick={onHide}>Закрыть</Button>
+                <Button variant="outline-danger" onClick={onHide}>Закрыть</Button>
                 <Button variant="outline-success" onClick={addCake}>Добавить</Button>
             </Modal.Footer>
         </Modal>
