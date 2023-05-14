@@ -10,14 +10,17 @@ import DropdownMenu from 'react-bootstrap/esm/DropdownMenu';
 
 const CartItem = ({ product }) => {
     const { cart } = useContext(Context);
-    const { cake } = useContext(Context)
+    const { cake } = useContext(Context);
+
+    const [filling, setFilling] = useState([])
+    const [dough, setDough] = useState([])
 
     useEffect(() => {
-        fetchFilling().then(data => cake.setFillings(data))
+        fetchFilling().then(data => setFilling(data))
     }, [])
 
     useEffect(() => {
-        fetchDough().then(data => cake.setDough(data))
+        fetchDough().then(data => setDough(data))
     }, [])
 
     const removeFromCart = async (cartProductId) => {
@@ -70,9 +73,18 @@ const CartItem = ({ product }) => {
                     </Dropdown> */}
 
                     <Dropdown>
-                        <Dropdown.Toggle variant="outline-warning" className='mb-2' style={{ color: "black", width: 225 }}> { "Выберите начинку"}
+                        <Dropdown.Toggle variant="outline-warning" className='mb-2' style={{ color: "black", width: 225 }}> {"Выберите начинку"}
                             <DropdownMenu>
-                                {cake.fillings.map(filling =>
+                                {/* {cake.fillings.map(filling =>
+                                    <Dropdown.Item
+                                        // onClick={() => product.setSelectedFilling(filling)}
+                                        key={filling.id}
+                                    >
+                                        {filling.type}
+                                    </Dropdown.Item>
+                                )} */}
+
+                                {filling.map(filling =>
                                     <Dropdown.Item
                                         // onClick={() => product.setSelectedFilling(filling)}
                                         key={filling.id}
@@ -87,7 +99,16 @@ const CartItem = ({ product }) => {
                     <Dropdown>
                         <Dropdown.Toggle variant="outline-warning" className='mt-2 mb-2' style={{ color: "black", width: 225 }}> Выберите корж
                             <DropdownMenu>
-                            {cake.doughs.map(dough =>
+                                {/* {cake.doughs.map(dough =>
+                                    <Dropdown.Item
+                                        // onClick={() => product.setSelectedFilling(filling)}
+                                        key={dough.id}
+                                    >
+                                        {dough.type}
+                                    </Dropdown.Item>
+                                )} */}
+
+                                {dough.map(dough =>
                                     <Dropdown.Item
                                         // onClick={() => product.setSelectedFilling(filling)}
                                         key={dough.id}
