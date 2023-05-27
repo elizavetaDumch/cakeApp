@@ -1,11 +1,11 @@
 import React, { useContext, useEffect, useState } from "react";
 import { Card, Col, Button, Dropdown } from "react-bootstrap";
-import { deleteProductFromCart } from "../http/cartAPI";
+import { deleteProductFromCart, updateCartProduct } from "../http/cartAPI";
 import { fetchDough, fetchFilling } from "../http/cakeAPI";
 import Image from "react-bootstrap/Image";
 import { toast } from "react-toastify";
 import { Context } from "../index";
-import DropdownMenu from 'react-bootstrap/esm/DropdownMenu';
+import Form from 'react-bootstrap/esm/Form';
 
 
 const CartItem = ({ product }) => {
@@ -27,6 +27,12 @@ const CartItem = ({ product }) => {
         const data = await deleteProductFromCart(cartProductId);
         cart.products = data.cart_products;
         toast("Товар удален из корзины");
+    };
+
+    const updateCartItem = async (params) => {
+        const data = await updateCartProduct(product.id, params);
+        cart.products = data.cart_products;
+        toast("Товар успешно изменен");
     };
 
     return (
@@ -56,69 +62,30 @@ const CartItem = ({ product }) => {
                         <b> {product.quantity * (product.cake.price + product.weight.price)} руб</b>
                     </Card.Text>
 
-                    {/* <Dropdown>
-                        <Dropdown.Toggle variant="outline-warning" className='mb-2' style={{color:"black", width: 225}}> Выберите начинку
-                            <DropdownMenu>
-                                <Dropdown.Item>
-                                    Ягодный микс
-                                </Dropdown.Item>
-                                <Dropdown.Item>
-                                    Шоколад
-                                </Dropdown.Item>
-                                <Dropdown.Item>
-                                    Солёная карамель
-                                </Dropdown.Item>
-                            </DropdownMenu>
-                        </Dropdown.Toggle>
-                    </Dropdown> */}
+                    <Form.Select
+                        value={product.fillingId}
+                        onChange={(event) => updateCartItem({ fillingId: event.currentTarget.value })}
+                    >
+                        <option disabled>Выберите начинку</option>
+                        {
+                            filling.map(filling =>
+                                <option value={filling.id}>{filling.type}</option>
+                            )
+                        }
+                    </Form.Select>
 
-                    <Dropdown>
-                        <Dropdown.Toggle variant="outline-warning" className='mb-2' style={{ color: "black", width: 225 }}> {"Выберите начинку"}
-                            <DropdownMenu>
-                                {/* {cake.fillings.map(filling =>
-                                    <Dropdown.Item
-                                        // onClick={() => product.setSelectedFilling(filling)}
-                                        key={filling.id}
-                                    >
-                                        {filling.type}
-                                    </Dropdown.Item>
-                                )} */}
-
-                                {filling.map(filling =>
-                                    <Dropdown.Item
-                                        // onClick={() => product.setSelectedFilling(filling)}
-                                        key={filling.id}
-                                    >
-                                        {filling.type}
-                                    </Dropdown.Item>
-                                )}
-                            </DropdownMenu>
-                        </Dropdown.Toggle>
-                    </Dropdown>
-
-                    <Dropdown>
-                        <Dropdown.Toggle variant="outline-warning" className='mt-2 mb-2' style={{ color: "black", width: 225 }}> Выберите корж
-                            <DropdownMenu>
-                                {/* {cake.doughs.map(dough =>
-                                    <Dropdown.Item
-                                        // onClick={() => product.setSelectedFilling(filling)}
-                                        key={dough.id}
-                                    >
-                                        {dough.type}
-                                    </Dropdown.Item>
-                                )} */}
-
-                                {dough.map(dough =>
-                                    <Dropdown.Item
-                                        // onClick={() => product.setSelectedFilling(filling)}
-                                        key={dough.id}
-                                    >
-                                        {dough.type}
-                                    </Dropdown.Item>
-                                )}
-                            </DropdownMenu>
-                        </Dropdown.Toggle>
-                    </Dropdown>
+                    <Form.Select
+                        className='mt-3'
+                        value={product.doughId}
+                        onChange={(event) => updateCartItem({ doughId: event.currentTarget.value })}
+                    >
+                        <option disabled>Выберите корж</option>
+                        {
+                            dough.map(dough =>
+                                <option value={dough.id}>{dough.type}</option>
+                            )
+                        }
+                    </Form.Select>
 
                     <Button
                         className='mt-3'

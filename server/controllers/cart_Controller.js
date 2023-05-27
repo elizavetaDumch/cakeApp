@@ -27,8 +27,14 @@ class Cart_Controller {
         return res.json(cart);
     }
 
-    async updateCartItem(req, res) {
-        
+    async updateProduct(req, res) {
+        await cartService.updateCartProduct({
+            productId: req.params.id,
+            userId: req.user.id,
+            params: req.body
+        });
+        const cart = await cartService.getUserCart(req.user.id);
+        return res.json(cart);
     }
 }
 

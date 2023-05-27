@@ -24,3 +24,14 @@ export const deleteProductFromCart = async (cartProductId) => {
     const { data } = await $authHost.delete(`api/cart/${cartProductId}`);
     return data;
 };
+
+/**
+ * Updates a product in the cart with provided fields.
+ * @param cartProductId
+ * @param params
+ * @returns {Promise<any>}
+ */
+export const updateCartProduct = async (cartProductId, params) => {
+    const { data } = await $authHost.patch(`api/cart/${cartProductId}`, params);
+    return data;
+};

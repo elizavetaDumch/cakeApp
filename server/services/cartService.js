@@ -1,5 +1,6 @@
 const cartRepository = require("../repositories/cartRepository");
 const userRepository = require("../repositories/userRepository");
+const {CartProduct} = require("../models/models");
 
 class CartService {
     /**
@@ -76,6 +77,24 @@ class CartService {
      */
     async truncateCart(cartId) {
         await cartRepository.truncateCart(cartId);
+    }
+
+    /**
+     * Updates a product in the cart with provided fields.
+     * @param productId
+     * @param userId
+     * @param params
+     * @returns {Promise<void>}
+     */
+    async updateCartProduct({ productId, userId, params }) {
+        const cart = await this.getUserCart(userId);
+        const cartProduct = await cartRepository.findCartProductByIdAndCartId({
+            id: productId,
+            cartId: cart.id
+        });
+        if (cartProduct) {
+            await CartProduct.upsert({ ...cartProduct.dataValues, ...params });
+        }
     }
 
     /**

@@ -1,14 +1,11 @@
 import React, { useContext } from "react";
 import { Card, Col, Button } from "react-bootstrap";
-import { deleteProductFromCart } from "../http/cartAPI";
 import Image from "react-bootstrap/Image";
-import { toast } from "react-toastify";
-import { Context } from "../index";
 
 const OrderProductItem = ({ product }) => {
     return (
         <Col className="mt-5">
-            <Card border={"dark"} style={{ width: 250, height: 600 }}>
+            <Card border={"dark"} style={{ width: 250, height: 670 }}>
                 <Image
                     width={248}
                     height={248}
@@ -28,6 +25,8 @@ const OrderProductItem = ({ product }) => {
                         <b>{product.cake.price + product.weight.price} руб</b>
                     </Card.Text>
                     <Card.Text>Кол-во: <b>{product.quantity} шт</b> </Card.Text>
+                    <Card.Text>Начинка: <b>{product.filling?.type || ''}</b> </Card.Text>
+                    <Card.Text>Корж: <b>{product.dough?.type || ''}</b> </Card.Text>
                     <Card.Text>
                         Сумма: {" "}
                         <b>{product.quantity * (product.cake.price + product.weight.price)} руб</b>

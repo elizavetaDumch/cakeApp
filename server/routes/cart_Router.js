@@ -7,5 +7,6 @@ const router = toAsyncRouter(Router());
 router.post("/", authMiddleware, cart_Controller.addProduct);
 router.del("/:id", authMiddleware, cart_Controller.removeProduct);
 router.get("/", authMiddleware, cart_Controller.getCart);
+router.patch("/:id", authMiddleware, cart_Controller.updateProduct);
 
 module.exports = router;
